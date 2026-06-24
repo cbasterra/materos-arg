@@ -2180,6 +2180,7 @@ input, select, textarea { font-family: inherit; }
           </select>
         </div>
         <div class="form-group"><label class="form-label">Stock</label><input class="form-input" type="number" id="pf-stock" placeholder="0"></div>
+        <div class="form-group"><label class="form-label">Peso (gramos)</label><input class="form-input" type="number" id="pf-weight" placeholder="Ej: 300"></div>
       </div>
       <div class="form-group">
         <label class="form-label">Categoría</label>
@@ -2597,6 +2598,22 @@ function openCheckout() {
   updateDeliveryFields();
 }
 
+// Costos de envío. "null" significa "se coordina aparte" (no se cobra
+// online todavía). Hoy aplica a los tres: domicilio_rosario (se manda
+// en moto, el costo depende de lo que salga en el momento) y los dos
+// de correo (a la espera de integrar la cotización real vía la API
+// de MiCorreo/Andreani, una vez que tengas las credenciales).
+const SHIPPING_COSTS = {
+  domicilio_rosario: null,
+  correo_sucursal: null,
+  correo_domicilio: null,
+  punto_retiro: 0
+};
+
+function getShippingCost(method) {
+  return SHIPPING_COSTS.hasOwnProperty(method) ? SHIPPING_COSTS[method] : 0;
+}
+
 function updateDeliveryFields() {
   const method = document.querySelector('input[name="delivery"]:checked')?.value;
   const group = document.getElementById('ch-address-group');
@@ -2619,6 +2636,8 @@ function updateDeliveryFields() {
     group.style.display = 'none';
     input.value = '';
   }
+
+  renderCheckoutSummary();
 }
 
 function closeCheckout() {
@@ -2626,14 +2645,27 @@ function closeCheckout() {
 }
 
 function renderCheckoutSummary() {
-  const total = getCartTotal();
-  document.getElementById('checkout-total-display').textContent = formatPrice(total);
-  document.getElementById('checkout-summary-items').innerHTML = cart.map(item => `
+  const method = document.querySelector('input[name="delivery"]:checked')?.value;
+  const shipping = getShippingCost(method);
+  const productsTotal = getCartTotal();
+  const total = productsTotal + (shipping || 0);
+
+  const itemsHtml = cart.map(item => `
     <div class="summary-item">
       <span>${item.name} × ${item.qty}</span>
       <span>${formatPrice(item.price * item.qty)}</span>
     </div>
   `).join('');
+
+  let shippingHtml = '';
+  if (shipping === null) {
+    shippingHtml = `<div class="summary-item" style="color:var(--text-light);font-size:0.85rem">Envío: te confirmamos el costo por WhatsApp luego de tu pedido (+54 9 341 281-2564)</div>`;
+  } else if (shipping > 0) {
+    shippingHtml = `<div class="summary-item"><span>Envío</span><span>${formatPrice(shipping)}</span></div>`;
+  }
+
+  document.getElementById('checkout-summary-items').innerHTML = itemsHtml + shippingHtml;
+  document.getElementById('checkout-total-display').textContent = formatPrice(total);
 }
 
 async function confirmOrder() {
@@ -2655,14 +2687,20 @@ async function confirmOrder() {
   // de SELECT para anon, que dejaría legibles todos los pedidos vía API).
   const orderId = crypto.randomUUID();
 
+  const shippingCost = getShippingCost(deliveryMethod);
+  const orderItems = cart.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty }));
+  if (shippingCost && shippingCost > 0) {
+    orderItems.push({ id: 'envio', name: DELIVERY_METHOD_LABELS[deliveryMethod] || 'Envío', price: shippingCost, qty: 1 });
+  }
+
   const orderData = {
     id: orderId,
     customer_name: name,
     customer_email: email,
     customer_phone: phone || null,
     customer_address: needsAddress ? address : 'Punto de retiro (a coordinar)',
-    items: cart.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
-    total: getCartTotal(),
+    items: orderItems,
+    total: getCartTotal() + (shippingCost || 0),
     payment_method: payment,
     delivery_method: deliveryMethod,
     sale_channel: 'web',
@@ -3705,6 +3743,7 @@ function openProductForm(productId = null) {
     document.getElementById('pf-discount-price').value = p.discount_price || '';
     document.getElementById('pf-discount-type').value = p.discount_type || '';
     document.getElementById('pf-stock').value = p.stock || 0;
+    document.getElementById('pf-weight').value = p.weight_grams || '';
     document.getElementById('pf-category').value = p.category_id || '';
     document.getElementById('pf-active').checked = p.active;
     document.getElementById('pf-featured').checked = p.featured;
@@ -3718,6 +3757,7 @@ function openProductForm(productId = null) {
     document.getElementById('pf-discount-price').value = '';
     document.getElementById('pf-discount-type').value = '';
     document.getElementById('pf-stock').value = '0';
+    document.getElementById('pf-weight').value = '';
     document.getElementById('pf-category').value = '';
     document.getElementById('pf-active').checked = true;
     document.getElementById('pf-featured').checked = false;
@@ -3810,6 +3850,7 @@ async function saveProduct() {
   const discountPrice = parseFloat(document.getElementById('pf-discount-price').value) || null;
   const discountType = document.getElementById('pf-discount-type').value || null;
   const stock = parseInt(document.getElementById('pf-stock').value) || 0;
+  const weightGrams = parseInt(document.getElementById('pf-weight').value) || null;
   const categoryId = document.getElementById('pf-category').value || null;
   const description = document.getElementById('pf-description').value.trim();
   const active = document.getElementById('pf-active').checked;
@@ -3823,7 +3864,7 @@ async function saveProduct() {
     name, slug, description: description || null,
     price, discount_price: discountPrice, discount_type: discountType,
     images: pendingImageUrls, category_id: categoryId,
-    stock, active, featured
+    stock, weight_grams: weightGrams, active, featured
   };
 
   let error;
