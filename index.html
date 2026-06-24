@@ -2038,7 +2038,7 @@ input, select, textarea { font-family: inherit; }
       <h1 class="admin-page-title">Productos</h1>
       <p class="admin-page-subtitle">Gestioná tu catálogo de productos</p>
       <div class="admin-table-header">
-        <input type="text" class="admin-search-input" placeholder="Buscar producto..." oninput="filterAdminProducts(this.value)">
+        <input type="text" id="admin-product-search" class="admin-search-input" placeholder="Buscar producto..." oninput="filterAdminProducts(this.value)">
         <select id="admin-cat-filter" class="admin-search-input" style="max-width:200px" onchange="filterAdminProducts(document.querySelector('.admin-search-input').value)">
           <option value="">Todas las categorías</option>
         </select>
@@ -2785,7 +2785,7 @@ function renderProductCard(product) {
     </button>` : '';
 
   return `
-    <div class="product-card" onclick="openProductDetail('${product.id}')">
+    <div class="product-card" data-product-id="${product.id}" onclick="openProductDetail('${product.id}')">
       <div class="product-card-image" data-images='${JSON.stringify(images).replace(/'/g, "&apos;")}' data-current-index="0">
         ${img
           ? `<img src="${img}" alt="${product.name}" loading="lazy" onerror="this.outerHTML='<div class=&quot;no-image&quot;>'+window.MATE_ICON_SVG+'</div>'">`
@@ -3078,6 +3078,7 @@ function openProductDetail(productId, skipHistory) {
   const images = product.images || [];
   currentDetailImages = images;
   currentDetailImageIndex = 0;
+  currentDetailProductId = productId;
   if (!skipHistory) history.pushState({ view: 'product', productId }, '', '#');
 
   const galleryMain = images.length > 0
@@ -3178,6 +3179,7 @@ function showStore() {
 
 let currentDetailImages = [];
 let currentDetailImageIndex = 0;
+let currentDetailProductId = null;
 
 function switchDetailImage(url, thumb, index) {
   const main = document.getElementById('detail-main-img');
@@ -4838,6 +4840,41 @@ function openTerms() {
 function closeTerms() {
   document.getElementById('terms-overlay').classList.remove('open');
 }
+
+// ============================================================
+// STOCK EN VIVO — se actualiza solo en cualquier pestaña abierta
+// cuando cambia el stock de un producto (venta web, venta manual,
+// o edición desde el admin), sin necesidad de recargar la página.
+// ============================================================
+function applyProductStockUpdate(updated) {
+  const idx = allProducts.findIndex(p => p.id === updated.id);
+  if (idx === -1) return;
+  allProducts[idx] = { ...allProducts[idx], ...updated };
+  const merged = allProducts[idx];
+
+  // Tarjetas visibles en la tienda (puede haber más de una, ej. en "relacionados")
+  document.querySelectorAll(`.product-card[data-product-id="${merged.id}"]`).forEach(card => {
+    card.outerHTML = renderProductCard(merged);
+  });
+
+  // Detalle de producto, si es el que está abierto
+  if (currentDetailProductId === merged.id && document.getElementById('product-detail-view').style.display !== 'none') {
+    openProductDetail(merged.id, true);
+  }
+
+  // Tabla de productos del panel admin, si está abierta (sin perder el filtro escrito)
+  const adminSearch = document.getElementById('admin-product-search');
+  if (adminSearch && document.getElementById('admin-products-table')?.offsetParent !== null) {
+    const catVal = document.getElementById('admin-cat-filter')?.value || '';
+    renderAdminProducts(adminSearch.value, catVal);
+  }
+}
+
+db.channel('products-stock-live')
+  .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'products' }, (payload) => {
+    applyProductStockUpdate(payload.new);
+  })
+  .subscribe();
 
 init();
 </script>
