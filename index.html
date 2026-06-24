@@ -2732,7 +2732,7 @@ async function confirmOrder() {
     showToast('¡Pedido confirmado con éxito! 🎉');
   } catch (err) {
     console.error(err);
-    showToast('Error al procesar el pedido. Intentá de nuevo.', 'error');
+    showToast(err.message || 'Error al procesar el pedido. Intentá de nuevo.', 'error');
   } finally {
     btn.disabled = false;
     btn.textContent = 'Confirmar pedido →';
