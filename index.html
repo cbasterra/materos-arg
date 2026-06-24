@@ -1351,7 +1351,7 @@ input, select, textarea { font-family: inherit; }
 .status-cancelled { background: #FEE2E2; color: #991B1B; }
 
 /* Product Form Modal */
-#product-form-overlay, #category-form-overlay, #order-detail-overlay, #settings-overlay {
+#product-form-overlay, #category-form-overlay, #order-detail-overlay, #settings-overlay, #privacy-overlay, #terms-overlay {
   display: none;
   position: fixed;
   inset: 0;
@@ -1362,9 +1362,14 @@ input, select, textarea { font-family: inherit; }
   padding: 30px 16px;
   overflow-y: auto;
 }
-#product-form-overlay.open, #category-form-overlay.open, #order-detail-overlay.open {
+#product-form-overlay.open, #category-form-overlay.open, #order-detail-overlay.open, #privacy-overlay.open, #terms-overlay.open {
   display: flex;
 }
+#privacy-overlay .form-modal, #terms-overlay .form-modal { max-width: 760px; }
+.legal-text h4 { font-family: var(--font-display); color: var(--brown-dark); margin: 22px 0 8px; font-size: 1.02rem; }
+.legal-text h4:first-child { margin-top: 0; }
+.legal-text p { margin-bottom: 10px; font-size: 0.93rem; line-height: 1.65; color: var(--text-mid); }
+.legal-text .legal-updated { margin-top: 24px; font-size: 0.8rem; color: var(--text-light); font-style: italic; }
 .form-modal {
   background: white;
   border-radius: var(--radius-lg);
@@ -1646,6 +1651,10 @@ input, select, textarea { font-family: inherit; }
       <hr class="footer-divider">
       <div class="footer-bottom">
         <span>© 2025 Materos Arg. Todos los derechos reservados.</span>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="javascript:void(0)" onclick="openPrivacyPolicy()" style="color:rgba(255,255,255,0.55);text-decoration:underline;font-size:0.82rem">Política de Privacidad</a>
+          <a href="javascript:void(0)" onclick="openTerms()" style="color:rgba(255,255,255,0.55);text-decoration:underline;font-size:0.82rem">Términos y Condiciones</a>
+        </div>
         <div class="footer-payment">
           <span class="pay-chip">
             <svg width="16" height="16" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="#009EE3"/><path d="M5 16c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="16" cy="16" r="3" fill="white"/></svg>
@@ -1667,6 +1676,97 @@ input, select, textarea { font-family: inherit; }
       </div>
     </div>
   </footer>
+
+  <!-- MODAL: POLÍTICA DE PRIVACIDAD -->
+  <div id="privacy-overlay">
+    <div class="form-modal">
+      <div class="form-modal-header">
+        <h3>Política de Privacidad</h3>
+        <button class="modal-close" onclick="closePrivacyPolicy()">✕</button>
+      </div>
+      <div class="form-modal-body legal-text">
+        <p><strong>Responsable:</strong> Ciro Basterra (CUIT 23-46760654-9), con domicilio en Rosario, Santa Fe, Argentina, en adelante "Materos Arg".</p>
+
+        <h4>1. Datos que recolectamos</h4>
+        <p>Al realizar una compra o contactarnos, podemos solicitar: nombre y apellido, correo electrónico, número de teléfono y dirección de envío (cuando corresponda), junto con el detalle de los productos solicitados. No solicitamos ni almacenamos datos de tarjetas de crédito o débito: esos los procesa directamente MercadoPago, nunca pasan por nuestros servidores.</p>
+
+        <h4>2. Para qué usamos estos datos</h4>
+        <p>Usamos tus datos para procesar y entregar tu pedido, comunicarnos con vos sobre su estado, y responder las consultas que nos hagas por email o WhatsApp. No usamos tus datos para enviarte publicidad sin tu consentimiento, ni los vendemos ni cedemos a terceros con fines comerciales.</p>
+
+        <h4>3. Con quién compartimos tus datos</h4>
+        <p>Compartimos los datos estrictamente necesarios con MercadoPago, para procesar el pago de tu pedido, y con la empresa de correo o logística que coordine el envío, cuando corresponda. No compartimos tus datos con nadie más.</p>
+
+        <h4>4. Cómo almacenamos tus datos</h4>
+        <p>Tus datos se guardan en servidores de Supabase, con acceso restringido y protegido por contraseña. Trabajamos para mantenerlos seguros, aunque ningún sistema es completamente infalible.</p>
+
+        <h4>5. Cookies y almacenamiento local</h4>
+        <p>Usamos el almacenamiento del navegador (localStorage) únicamente para recordar el contenido de tu carrito de compras entre visitas al sitio. No usamos cookies de seguimiento ni de publicidad de terceros.</p>
+
+        <h4>6. Tus derechos</h4>
+        <p>De acuerdo con la Ley de Protección de Datos Personales (Ley 25.326), podés acceder, rectificar, actualizar o solicitar la eliminación de tus datos personales en cualquier momento, escribiéndonos a contacto@materosarg.com. La Agencia de Acceso a la Información Pública, como Órgano de Control de la Ley 25.326, tiene la atribución de atender denuncias y reclamos relacionados con el incumplimiento de las normas de protección de datos personales.</p>
+
+        <h4>7. Cambios a esta política</h4>
+        <p>Podemos actualizar esta política en el futuro. Cualquier cambio se va a publicar en esta misma página.</p>
+
+        <p class="legal-updated">Última actualización: junio de 2026.</p>
+      </div>
+      <div class="form-modal-footer">
+        <button class="btn-primary btn-sm" onclick="closePrivacyPolicy()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TÉRMINOS Y CONDICIONES -->
+  <div id="terms-overlay">
+    <div class="form-modal">
+      <div class="form-modal-header">
+        <h3>Términos y Condiciones</h3>
+        <button class="modal-close" onclick="closeTerms()">✕</button>
+      </div>
+      <div class="form-modal-body legal-text">
+        <h4>1. Quiénes somos</h4>
+        <p>Este sitio es operado por Ciro Basterra, CUIT 23-46760654-9, con domicilio en Rosario, Santa Fe, Argentina, en adelante "Materos Arg" o "el vendedor". Podés contactarnos por email a contacto@materosarg.com o por WhatsApp al +54 9 341 281-2564.</p>
+
+        <h4>2. Aceptación de estos términos</h4>
+        <p>Al realizar una compra en este sitio, aceptás estos Términos y Condiciones en su totalidad. Te recomendamos leerlos antes de confirmar tu pedido.</p>
+
+        <h4>3. Productos y precios</h4>
+        <p>Los precios publicados están expresados en pesos argentinos (ARS) e incluyen los impuestos correspondientes, salvo que se indique lo contrario. Nos reservamos el derecho de modificar precios y disponibilidad de productos sin previo aviso, lo cual no afecta a pedidos ya confirmados.</p>
+
+        <h4>4. Cómo se confirma una compra</h4>
+        <p>El pedido se considera confirmado cuando completás el formulario de checkout y, si corresponde, el pago es aprobado por MercadoPago. Vas a ver la confirmación en pantalla al finalizar.</p>
+
+        <h4>5. Medios de pago</h4>
+        <p>Aceptamos pagos a través de MercadoPago (dinero en cuenta, tarjetas de crédito y débito), transferencia bancaria y efectivo, según el método de entrega elegido.</p>
+
+        <h4>6. Envíos</h4>
+        <p>Los tiempos y costos de envío se informan al momento de confirmar el pedido. Trabajamos para que tu pedido llegue en el menor tiempo posible, aunque los plazos pueden variar según la zona de entrega y el transportista utilizado.</p>
+
+        <h4>7. Derecho de revocación (botón de arrepentimiento)</h4>
+        <p>De acuerdo con el artículo 34 de la Ley de Defensa del Consumidor (N° 24.240) y la Resolución 424/2020 de la Secretaría de Comercio Interior, tenés derecho a revocar la aceptación de la compra dentro de los DIEZ (10) días corridos contados desde la entrega del producto o la celebración del contrato (lo que ocurra después), sin necesidad de invocar causa alguna. Para ejercerlo, escribinos a contacto@materosarg.com o por WhatsApp indicando el número de tu pedido.</p>
+
+        <h4>8. Cambios y devoluciones por defectos o disconformidad</h4>
+        <p>Además del derecho de revocación mencionado arriba, si tu producto llega con algún defecto o no estás conforme, tenés hasta 10 días desde la recepción para contactarnos y coordinar el cambio o la devolución correspondiente.</p>
+
+        <h4>9. Garantía legal</h4>
+        <p>Todos los productos cuentan con la garantía legal vigente según la Ley de Defensa del Consumidor.</p>
+
+        <h4>10. Responsabilidad</h4>
+        <p>No nos hacemos responsables por demoras ocasionadas por terceros (empresas de correo, MercadoPago) ni por el mal uso de los productos una vez entregados.</p>
+
+        <h4>11. Modificación de estos términos</h4>
+        <p>Podemos actualizar estos Términos y Condiciones en cualquier momento. Los cambios entran en vigencia desde su publicación en esta página.</p>
+
+        <h4>12. Ley aplicable y jurisdicción</h4>
+        <p>Estos términos se rigen por las leyes de la República Argentina. Ante cualquier conflicto, y sin perjuicio del derecho del consumidor a optar por la jurisdicción de su domicilio según lo establece la Ley 24.240, las partes podrán someterse a los tribunales ordinarios de la ciudad de Rosario, provincia de Santa Fe.</p>
+
+        <p class="legal-updated">Última actualización: junio de 2026.</p>
+      </div>
+      <div class="form-modal-footer">
+        <button class="btn-primary btn-sm" onclick="closeTerms()">Cerrar</button>
+      </div>
+    </div>
+  </div>
 
   <!-- BOTÓN FLOTANTE WHATSAPP (solo en la tienda pública) -->
   <a href="https://wa.me/5493412812564" target="_blank" id="whatsapp-float" title="Contactanos por WhatsApp">
@@ -4724,6 +4824,19 @@ function confirmSearchSkipHistory(val) {
         <p>Sin resultados para "${val}".</p>
       </div>`;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openPrivacyPolicy() {
+  document.getElementById('privacy-overlay').classList.add('open');
+}
+function closePrivacyPolicy() {
+  document.getElementById('privacy-overlay').classList.remove('open');
+}
+function openTerms() {
+  document.getElementById('terms-overlay').classList.add('open');
+}
+function closeTerms() {
+  document.getElementById('terms-overlay').classList.remove('open');
 }
 
 init();
