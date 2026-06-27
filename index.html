@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Materos Arg</title>
+<title>locosxelmate.ros</title>
+<meta name="description" content="locosxelmate.ros — Mates, bombillas y accesorios. Envíos a todo el país, pago con MercadoPago.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="locosxelmate.ros">
+<meta property="og:description" content="Mates, bombillas y accesorios. Envíos a todo el país, pago con MercadoPago.">
+<meta property="og:url" content="https://cbasterra.github.io/materos-arg/">
+<meta property="og:site_name" content="locosxelmate.ros">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="locosxelmate.ros">
+<meta name="twitter:description" content="Mates, bombillas y accesorios. Envíos a todo el país, pago con MercadoPago.">
 <link rel="icon" type="image/png" href="data:image/png;base64,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">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 <script>
@@ -1636,13 +1645,13 @@ input, select, textarea { font-family: inherit; }
             </li>
           </ul>
           <div style="display:flex;gap:14px;margin-top:16px;align-items:center">
-            <a href="https://instagram.com/materosarg" target="_blank" class="social-link" title="Instagram">
+            <a href="https://instagram.com/materosarg" target="_blank" class="social-link" id="footer-instagram" title="Instagram">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </a>
-            <a href="https://tiktok.com/@materosarg" target="_blank" class="social-link" title="TikTok">
+            <a href="https://tiktok.com/@materosarg" target="_blank" class="social-link" id="footer-tiktok" title="TikTok">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.2 8.2 0 004.79 1.53V6.82a4.85 4.85 0 01-1.02-.13z"/></svg>
             </a>
-            <a href="https://wa.me/5493412812564" target="_blank" class="social-link" title="WhatsApp">
+            <a href="https://wa.me/5493412812564" target="_blank" class="social-link" id="footer-whatsapp-icon" title="WhatsApp">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </a>
           </div>
@@ -1650,7 +1659,7 @@ input, select, textarea { font-family: inherit; }
       </div>
       <hr class="footer-divider">
       <div class="footer-bottom">
-        <span>© 2025 Materos Arg. Todos los derechos reservados.</span>
+        <span>© 2025 locosxelmate.ros. Todos los derechos reservados.</span>
         <div style="display:flex;gap:14px;flex-wrap:wrap">
           <a href="javascript:void(0)" onclick="openPrivacyPolicy()" style="color:rgba(255,255,255,0.55);text-decoration:underline;font-size:0.82rem">Política de Privacidad</a>
           <a href="javascript:void(0)" onclick="openTerms()" style="color:rgba(255,255,255,0.55);text-decoration:underline;font-size:0.82rem">Términos y Condiciones</a>
@@ -1685,7 +1694,7 @@ input, select, textarea { font-family: inherit; }
         <button class="modal-close" onclick="closePrivacyPolicy()">✕</button>
       </div>
       <div class="form-modal-body legal-text">
-        <p><strong>Responsable:</strong> Ciro Basterra (CUIT 23-46760654-9), con domicilio en Rosario, Santa Fe, Argentina, en adelante "Materos Arg".</p>
+        <p><strong>Responsable:</strong> Ciro Basterra (CUIT 23-46760654-9), con domicilio en Rosario, Santa Fe, Argentina, en adelante "locosxelmate.ros".</p>
 
         <h4>1. Datos que recolectamos</h4>
         <p>Al realizar una compra o contactarnos, podemos solicitar: nombre y apellido, correo electrónico, número de teléfono y dirección de envío (cuando corresponda), junto con el detalle de los productos solicitados. No solicitamos ni almacenamos datos de tarjetas de crédito o débito: esos los procesa directamente MercadoPago, nunca pasan por nuestros servidores.</p>
@@ -1725,7 +1734,7 @@ input, select, textarea { font-family: inherit; }
       </div>
       <div class="form-modal-body legal-text">
         <h4>1. Quiénes somos</h4>
-        <p>Este sitio es operado por Ciro Basterra, CUIT 23-46760654-9, con domicilio en Rosario, Santa Fe, Argentina, en adelante "Materos Arg" o "el vendedor". Podés contactarnos por email a contacto@materosarg.com o por WhatsApp al +54 9 341 281-2564.</p>
+        <p>Este sitio es operado por Ciro Basterra, CUIT 23-46760654-9, con domicilio en Rosario, Santa Fe, Argentina, en adelante "locosxelmate.ros" o "el vendedor". Podés contactarnos por email a contacto@materosarg.com o por WhatsApp al +54 9 341 281-2564.</p>
 
         <h4>2. Aceptación de estos términos</h4>
         <p>Al realizar una compra en este sitio, aceptás estos Términos y Condiciones en su totalidad. Te recomendamos leerlos antes de confirmar tu pedido.</p>
@@ -1904,7 +1913,7 @@ input, select, textarea { font-family: inherit; }
       <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/><circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none"/></svg>
     </div>
     <h2>Panel de administración</h2>
-    <p>Materos Arg — Acceso restringido</p>
+    <p>locosxelmate.ros — Acceso restringido</p>
     <input type="email" class="admin-login-input" id="admin-email-input" placeholder="Email" autocomplete="off" oninput="document.getElementById('admin-login-error').style.display='none'" style="text-align:center;letter-spacing:normal;margin-bottom:14px">
     <div class="admin-password-wrap">
       <input type="password" class="admin-login-input" id="admin-password-input" placeholder="" autocomplete="off" oninput="document.getElementById('admin-login-error').style.display='none'" onkeyup="if(event.key==='Enter') loginAdmin()">
@@ -2101,8 +2110,13 @@ input, select, textarea { font-family: inherit; }
       <div class="settings-section">
         <h3>Información general</h3>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Nombre del sitio</label><input class="form-input" id="s-name" placeholder="Materos Arg"></div>
+          <div class="form-group"><label class="form-label">Nombre del sitio</label><input class="form-input" id="s-name" placeholder="locosxelmate.ros"></div>
           <div class="form-group"><label class="form-label">Descripción breve</label><input class="form-input" id="s-desc" placeholder="Tu tienda de mates..."></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Logo del sitio</label>
+          <input type="file" id="s-logo-input" accept="image/*" onchange="handleLogoUpload(this)">
+          <div id="s-logo-preview" style="margin-top:10px"></div>
         </div>
       </div>
       <div class="settings-section">
@@ -2124,6 +2138,9 @@ input, select, textarea { font-family: inherit; }
         </div>
         <div class="form-row">
           <div class="form-group"><label class="form-label">Instagram</label><input class="form-input" id="s-instagram" placeholder="@materosarg"></div>
+          <div class="form-group"><label class="form-label">TikTok</label><input class="form-input" id="s-tiktok" placeholder="@materosarg"></div>
+        </div>
+        <div class="form-row">
           <div class="form-group"><label class="form-label">WhatsApp</label><input class="form-input" id="s-whatsapp" placeholder="+5491100000000"></div>
         </div>
       </div>
@@ -3117,7 +3134,7 @@ function openProductDetail(productId, skipHistory) {
   currentDetailImages = images;
   currentDetailImageIndex = 0;
   currentDetailProductId = productId;
-  if (!skipHistory) history.pushState({ view: 'product', productId }, '', '#');
+  if (!skipHistory) history.pushState({ view: 'product', productId }, '', `#producto/${encodeURIComponent(product.slug)}`);
 
   const galleryMain = images.length > 0
     ? `<img src="${images[0]}" alt="${product.name}" id="detail-main-img" onerror="this.outerHTML='<div class=&quot;no-image-lg&quot;>'+window.MATE_ICON_SVG+'</div>'">`
@@ -3171,6 +3188,9 @@ function openProductDetail(productId, skipHistory) {
       </button>
       <button class="btn-secondary" style="width:100%;margin-top:8px" onclick="openCart()">
         Ver carrito →
+      </button>
+      <button class="btn-secondary" style="width:100%;margin-top:8px" onclick="shareProduct('${product.id}')">
+        🔗 Compartir
       </button>
       <div class="payment-methods">
         <h4>Medios de pago aceptados</h4>
@@ -3805,6 +3825,43 @@ async function handleImageUpload(input) {
 
 // ============================================================
 // HERO SLIDER IMAGES (subida desde Configuración)
+// ============================================================
+// LOGO DEL SITIO
+// ============================================================
+let pendingLogoUrl = '';
+
+function renderLogoPreview() {
+  const container = document.getElementById('s-logo-preview');
+  if (!container) return;
+  container.innerHTML = pendingLogoUrl
+    ? `<div class="image-preview-item" style="display:inline-block">
+         <img src="${pendingLogoUrl}" alt="" style="max-height:60px;display:block" onerror="this.src=''">
+         <button class="image-preview-remove" onclick="removeLogo()">✕</button>
+       </div>`
+    : '';
+}
+
+function removeLogo() {
+  pendingLogoUrl = '';
+  renderLogoPreview();
+}
+
+async function handleLogoUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const ext = file.name.split('.').pop();
+  const filename = `site-logo-${Date.now()}.${ext}`;
+  const { error } = await db.storage.from('product-images').upload(filename, file, { cacheControl: '3600', upsert: false });
+  if (error) { showToast('Error al subir el logo: ' + error.message, 'error'); input.value = ''; return; }
+  const { data: urlData } = db.storage.from('product-images').getPublicUrl(filename);
+  if (urlData?.publicUrl) {
+    pendingLogoUrl = urlData.publicUrl;
+    renderLogoPreview();
+    showToast('Logo subido ✓ — no olvides "Guardar configuración"');
+  }
+  input.value = '';
+}
+
 // ============================================================
 let pendingHeroImages = [];
 
@@ -4472,6 +4529,7 @@ async function loadSettings() {
   document.getElementById('s-email').value = map['contact_email'] || '';
   document.getElementById('s-phone').value = map['contact_phone'] || '';
   document.getElementById('s-instagram').value = map['contact_instagram'] || '';
+  document.getElementById('s-tiktok').value = map['contact_tiktok'] || '';
   document.getElementById('s-whatsapp').value = map['contact_whatsapp'] || '';
 
   const primaryColor = map['primary_color'] || '#2D5A27';
@@ -4489,14 +4547,20 @@ async function loadSettings() {
   pendingHeroImages = map['hero_images'] ? JSON.parse(map['hero_images']) : [];
   renderHeroImagePreviews();
 
+  pendingLogoUrl = map['site_logo'] || '';
+  renderLogoPreview();
+
   applySiteSettingsToPage(map);
 }
 
 // Aplica los textos/datos guardados en site_settings a todos los lugares
 // visibles de la página pública (header, hero, footer, título de pestaña)
 function applySiteSettingsToPage(map) {
-  if (map['site_name']) {
-    document.title = map['site_name'];
+  if (map['site_logo']) {
+    document.querySelectorAll('.navbar-logo .logo-text, .footer-brand .logo-text, .admin-sidebar-logo').forEach(el => {
+      el.innerHTML = `<img src="${map['site_logo']}" alt="${map['site_name'] || 'Logo'}" style="max-height:36px;display:block">`;
+    });
+  } else if (map['site_name']) {
     const words = map['site_name'].trim().split(/\s+/);
     const lastWord = words.length > 1 ? words.pop() : '';
     const mainPart = words.join(' ');
@@ -4506,6 +4570,9 @@ function applySiteSettingsToPage(map) {
     document.querySelectorAll('.navbar-logo .logo-text, .footer-brand .logo-text, .admin-sidebar-logo').forEach(el => {
       el.innerHTML = newHTML;
     });
+  }
+  if (map['site_name']) {
+    document.title = map['site_name'];
   }
   if (map['hero_title']) {
     const el = document.getElementById('site-hero-title');
@@ -4534,15 +4601,34 @@ function applySiteSettingsToPage(map) {
   }
   if (map['contact_email']) {
     const el = document.getElementById('footer-email');
-    if (el) el.textContent = map['contact_email'];
+    if (el) {
+      el.href = `mailto:${map['contact_email']}`;
+      const textNode = [...el.childNodes].find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim().length > 0);
+      if (textNode) textNode.textContent = ' ' + map['contact_email'];
+    }
   }
   if (map['contact_phone']) {
     const el = document.getElementById('footer-phone');
-    if (el) el.textContent = map['contact_phone'];
+    if (el) {
+      const digits = map['contact_phone'].replace(/[^0-9]/g, '');
+      el.href = `https://wa.me/${digits}`;
+      const textNode = [...el.childNodes].find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim().length > 0);
+      if (textNode) textNode.textContent = ' ' + map['contact_phone'];
+    }
   }
   if (map['contact_instagram']) {
     const el = document.getElementById('footer-instagram');
-    if (el) el.textContent = map['contact_instagram'];
+    if (el) el.href = `https://instagram.com/${map['contact_instagram'].replace('@', '')}`;
+  }
+  if (map['contact_tiktok']) {
+    const el = document.getElementById('footer-tiktok');
+    if (el) el.href = `https://tiktok.com/@${map['contact_tiktok'].replace('@', '')}`;
+  }
+  if (map['contact_whatsapp']) {
+    const digits = map['contact_whatsapp'].replace(/[^0-9]/g, '');
+    document.querySelectorAll('#footer-whatsapp-icon, #whatsapp-float').forEach(el => {
+      el.href = `https://wa.me/${digits}`;
+    });
   }
   if (map['hero_images']) {
     try {
@@ -4633,9 +4719,11 @@ async function saveSettings() {
     featured_subtitle: document.getElementById('s-featured-subtitle').value,
     footer_tagline: document.getElementById('s-footer-tagline').value,
     hero_images: JSON.stringify(pendingHeroImages),
+    site_logo: pendingLogoUrl,
     contact_email: document.getElementById('s-email').value,
     contact_phone: document.getElementById('s-phone').value,
     contact_instagram: document.getElementById('s-instagram').value,
+    contact_tiktok: document.getElementById('s-tiktok').value,
     contact_whatsapp: document.getElementById('s-whatsapp').value,
     primary_color: document.getElementById('s-primary-color-hex').value,
     accent_color: document.getElementById('s-accent-color-hex').value,
@@ -4721,8 +4809,16 @@ async function init() {
   buildNavbar();
   renderFeaturedGrid();
 
-  // Estado inicial para que el botón "atrás" del navegador funcione bien
-  history.replaceState({ view: 'home' }, '', '#');
+  // Si la URL es un link directo a un producto, lo abrimos encima de la grilla.
+  const openedProductFromLink = handleProductDeepLink();
+
+  // Estado inicial para que el botón "atrás" del navegador funcione bien.
+  // No pisamos la URL si es un link de producto o una vuelta de pago de
+  // MercadoPago, para que cada uno se procese correctamente más abajo.
+  const initialHash = window.location.hash;
+  if (!openedProductFromLink && !initialHash.includes('payment-')) {
+    history.replaceState({ view: 'home' }, '', '#');
+  }
 
   // Detectar si el cliente vuelve desde MercadoPago después de pagar
   handleMercadoPagoReturn();
@@ -4737,6 +4833,43 @@ async function init() {
   } else {
     document.documentElement.classList.remove('boot-admin');
   }
+}
+
+async function shareProduct(productId) {
+  const product = allProducts.find(p => p.id === productId);
+  if (!product) return;
+  // Comparte el link de la Edge Function "product-preview" (no el link
+  // directo del sitio): esa función es la que le muestra a WhatsApp/
+  // Instagram la foto y el nombre correctos, y después redirige a la
+  // persona real hasta este mismo producto en la tienda.
+  const url = `https://hupfwofrrgdjigmlcfmj.supabase.co/functions/v1/product-preview/${encodeURIComponent(product.slug)}`;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: product.name, url });
+    } catch (err) {
+      // El usuario cerró el cartel de compartir sin elegir nada, no hacemos nada más
+    }
+  } else {
+    try {
+      await navigator.clipboard.writeText(url);
+      showToast('Link copiado al portapapeles 📋');
+    } catch (err) {
+      showToast('No se pudo copiar el link', 'error');
+    }
+  }
+}
+
+function handleProductDeepLink() {
+  const hash = window.location.hash;
+  if (!hash.startsWith('#producto/')) return false;
+  const slug = decodeURIComponent(hash.replace('#producto/', ''));
+  const product = allProducts.find(p => p.slug === slug);
+  if (product) {
+    openProductDetail(product.id, true);
+    return true;
+  }
+  return false;
 }
 
 function handleMercadoPagoReturn() {
