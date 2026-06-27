@@ -1529,7 +1529,7 @@ input, select, textarea { font-family: inherit; }
       <ul class="navbar-nav" id="main-nav"></ul>
       <div class="navbar-search" style="position:relative">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="search-input" placeholder="Buscar productos..." autocomplete="off"
+        <input type="search" id="search-input" placeholder="Buscar productos..." autocomplete="off"
           oninput="handleSearchInput(this.value)"
           onkeydown="if(event.key==='Enter') confirmSearch(this.value)"
           onfocus="if(this.value) showSearchDropdown()">
